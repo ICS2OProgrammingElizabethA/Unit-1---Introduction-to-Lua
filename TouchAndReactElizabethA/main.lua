@@ -10,6 +10,9 @@ display.setDefault ("background", 104/255, 221/255, 161/255)
 --hide status bar
 display.setStatusBar(display.HiddenStatusBar)
 
+local correctSound = audio.loadSound("Sounds/BoingSoundEffect.mp3")
+local correctSoundChannel
+
 ----create red button, set its position and make visible
 local blueButton = display.newImageRect("Images/Fast Button Inactive@2x.png", 198, 96)
 blueButton.x = display.contentWidth/2
@@ -28,6 +31,10 @@ textObject.x = display.contentWidth/2
 textObject.y = display.contentHeight/3
 textObject:setTextColor (145/255, 54/255, 216/255)
 textObject.isVisible = false
+
+--LOCAL SOUND EFFECTS
+local boingSound = audio.loadSound( "Sound/BoingSoundEffect.mp3" )
+local boingSoundChannel
 
 --Fucntion; BlueButtonListener
 --Input: touch listener
@@ -66,6 +73,8 @@ local function RedButtonlistener(touch)
 	if (touch.phase == "ended") then
 		blueButton.isVisible = false
 		redButton.isVisible = true
+		boingSoundChannel = audio.play(boingSound)
+		timer.performWithDelay(2000, HideBoing)
 		textObject.isVisible = true
 	end
 end
