@@ -18,6 +18,8 @@ local countDownTimer
 local lives = 3
 local heart1
 local heart2
+local heart3
+local heart4
 
 --***ADD LOCAL VARIABLE FOR: INCORRECT OBJECT, POINTS
 
@@ -69,4 +71,13 @@ heart1.y = display.contentHeight * 1 / 7
 
 heart2 = display.newImageRect("Images/heart.png", 100, 100)
 heart2.x = display.contentWidth * 6 / 8
-heart2.y = di.contentHeight * 1 / 7
+heart2.y = display.contentHeight * 1 / 7
+
+heart3 = display.newImageRect("Images/heart.png", 100, 100)
+heart3.x = display.contentWidth * 5 / 8
+heart3.y = display.contentHeight * 1 / 7
+
+heart4 = display.newImageRect("Images/heart.png", 100, 100)
+heart4.x = display.contentWidth * 4 / 8
+heart4.y = display.contentHeight * 1 / 7
+
