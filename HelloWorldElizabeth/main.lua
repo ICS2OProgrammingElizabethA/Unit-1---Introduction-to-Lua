@@ -4,6 +4,10 @@
 --terminal.
 -----------------------------------------------------------------------------------------
 
+---------SOUNDS----------------------
+local funnySong = audio.loadSound( "Sounds/funnysong.mp3" )
+local funnySongChannel
+
 -- print "Hello, World" to the command terminal
 print ("***Hellooooooooooooo!")
 print ("***This is awsome!")
@@ -26,6 +30,7 @@ textObject:setTextColor(226/255, 66/255, 244/255)
 
 --create a local variable
 local textObjectSignature
+funnySongChannel = audio.play(funnySong)
 
 --displays text on the screen at position x = 400 and y = 600 width
 --a default font style and font size of 50

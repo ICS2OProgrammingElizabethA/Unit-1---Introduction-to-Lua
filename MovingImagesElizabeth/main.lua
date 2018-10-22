@@ -2,7 +2,11 @@
 -- Name: Elizabeth
 -- Course: ICS2O/3C
 -- This program displays an image that moves acrross the screen.
---
+
+--LOCAL SOUND EFFECTS
+local buddySound = audio.loadSound( "Sounds/buddy.mp3" )
+local buddySoundChannel
+
 --hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
@@ -53,5 +57,7 @@ local function MoveGirl2(event)
 end
 
 --MoveShip will be called over and over again
+buddySoundChannel = audio.play(buddySound)
+timer.performWithDelay(200, HideBuddy)
 Runtime:addEventListener("enterFrame", MoveShip)
 Runtime:addEventListener("enterFrame", MoveGirl2)

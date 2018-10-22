@@ -4,8 +4,12 @@
 --This program displays a red button when the blue button is clicked.
 -----------------------------------------------------------------------------------------
 
+--LOCAL SOUND EFFECTS
+local boingSound = audio.loadSound( "Sounds/BoingSoundEffect.mp3" )
+local boingSoundChannel
+
 -- set background colour
-display.setDefault ("background", 104/255, 221/255, 161/255)
+display.setDefault ("background", 14/255, 16/255, 144/255)
 
 --hide status bar
 display.setStatusBar(display.HiddenStatusBar)
@@ -25,16 +29,18 @@ redButton.x = display.contentWidth/2
 redButton.y = display.contentHeight/2
 redButton.isVisible = false
 
+--create a third image
+local checkmark = display.newImageRect("Images/checkmark.png", 156, 64)
+checkmark.x = 800
+checkmark.y = 250
+checkmark.isVisible = false
+
 --create text object, set its position and make it visible
 local textObject = display.newText ("Clicked!",0, 0, nil, 50)
 textObject.x = display.contentWidth/2
 textObject.y = display.contentHeight/3
 textObject:setTextColor (145/255, 54/255, 216/255)
 textObject.isVisible = false
-
---LOCAL SOUND EFFECTS
-local boingSound = audio.loadSound( "Sound/BoingSoundEffect.mp3" )
-local boingSoundChannel
 
 --Fucntion; BlueButtonListener
 --Input: touch listener
@@ -46,12 +52,14 @@ local function BlueButtonlistener(touch)
 		blueButton.isVisible = false
 		redButton.isVisible = true
 		textObject.isVisible = true
+		checkmark.isVisible = true
 	end 
 
 	if (touch.phase == "ended") then
 		blueButton.isVisible = true
 		redButton.isVisible = false
 		textObject.isVisible = false
+		checkmark.isVisible = false
 	end
 end
 
@@ -68,14 +76,16 @@ local function RedButtonlistener(touch)
 		blueButton.isVisible = false
 		redButton.isVisible = true
 		textObject.isVisible = true
+		checkmark.isVisible = false
 	end 
 
 	if (touch.phase == "ended") then
-		blueButton.isVisible = false
-		redButton.isVisible = true
+		blueButton.isVisible = true
+		redButton.isVisible = false
 		boingSoundChannel = audio.play(boingSound)
 		timer.performWithDelay(2000, HideBoing)
-		textObject.isVisible = true
+		textObject.isVisible = false
+		checkmark.isVisible = false
 	end
 end
 
