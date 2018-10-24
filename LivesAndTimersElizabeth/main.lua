@@ -21,8 +21,8 @@ display.setDefault( "background", 195/255, 240/255, 255/255 )
 --------------------------------------------------------
 
 ---VARIABLES FOR THE TIMER
-local totalSeconds = 5
-local secondsLeft = 5
+local totalSeconds = 10
+local secondsLeft = 10
 local clockText
 local countDownTimer
 local gameOver
@@ -51,11 +51,13 @@ local numberOfPoints = 0
 -- SOUNDS
 --------------------------------------------------------
 
---Sounds
+--Correct sound
 local correctSound = audio.loadSound("Sounds/correctSound.mp3")
 local correctSoundChannel
-local budddySound = audio.loadSound("Sounds/budddysound.mp3")
-local budddySoundChannel
+
+--Buddy sound
+local buddySound = audio.loadSound("Sounds/buddysound.mp3")
+local buddySoundChannel
 
 --Incorrect Sound
 local wrongSound = audio.loadSound("Sounds/wrongSound.mp3")
@@ -144,8 +146,8 @@ end
 local function AskQuestion()
 	--generate 2 random numbers between a max. and a min. number
 	randomOperator = math.random(1,3)
-	randomNumber1 = math.random(10,20)
-	randomNumber2 = math.random(10,20)
+	randomNumber1 = math.random(1,10)
+	randomNumber2 = math.random(1,10)
 
  
  	if (randomOperator == 1) then
@@ -187,10 +189,11 @@ local function NumericFieldListener( event )
 		--clear text field 
 		event.target.text = "" 
 
-	elseif event.phase == "submitted" then
+	elseif (event.phase == "submitted") then
 
 		-- when the answer is submitted (enter key is pressed) set user input bto user's answer
 		userAnswer = tonumber(event.target.text)
+
 
 		--if the user's answer and the correct answer and the correct answer are the same:
 		if (userAnswer == correctAnswer) then
@@ -201,20 +204,20 @@ local function NumericFieldListener( event )
 			timer.performWithDelay(2000,HideCorrect)
 			numberOfPoints = numberOfPoints + 1
 
-			event.target.text = "" 
+			
 
         -- create increasing points in the text object
 			 pointsTextObject.text = "Points = ".. numberOfPoints
 
-		elseif (userAnswer ~= correctAnswer) then
+		else
 			incorrectObject.isVisible = true
 			wrongSoundChannel = audio.play(wrongSound)
 			lives = lives - 1
 			UpdateHearts()
-			incorrectObject.isVisible = true
-			timer.performWithDelay(2000,HideIncorrect)
-			event.target.text = "" 		
+			timer.performWithDelay(2000,HideIncorrect)			
+
 		end
+		event.target.text = "" 
 	end
 end
 
