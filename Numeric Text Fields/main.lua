@@ -40,7 +40,7 @@ local wrongSoundChannel
 -- local functions 
 local function AskQuestion()
 	--generate 2 random numbers between a max. and a min. number
-	randomOperator = math.random(0,3)
+	randomOperator = math.random(1,3)
 	randomNumber1 = math.random(10,20)
 	randomNumber2 = math.random(10,20)
 
@@ -95,7 +95,7 @@ local function NumericFieldListener( event )
 			correctSoundChannel = audio.play(correctSound)
 			incorrectObject.isVisible = false
 			timer.performWithDelay(2000,HideCorrect)
-			numberPoints = numberOfPoints + 1
+			numberOfPoints = numberOfPoints + 1
 
 			event.target.text = "" 
 
@@ -139,7 +139,7 @@ incorrectObject.isVisible = false
 ------------------------------------------------------------
 
 numericField = native.newTextField(display.contentWidth/2, display.contentHeight*2/3, 350, 90)
-numericField.inputType = "number"
+numericField.inputType = "default"
 
 --add the event listener fo the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener)
