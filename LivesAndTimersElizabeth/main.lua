@@ -160,13 +160,13 @@ local function AskQuestion()
 	 	correctAnswer = randomNumber1 - randomNumber2
 
 		--create question in text object
-		questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
+		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
 
 	elseif (randomOperator == 3) then
 	 	correctAnswer = randomNumber1 * randomNumber2
 
 		--create question in text object
-		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
+		questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
 	end	
 
 end
@@ -200,21 +200,18 @@ local function NumericFieldListener( event )
 
 			correctObject.isVisible = true 
 			correctSoundChannel = audio.play(correctSound)
-			incorrectObject.isVisible = false
-			timer.performWithDelay(2000,HideCorrect)
-			numberOfPoints = numberOfPoints + 1
-
-			
+			timer.performWithDelay(2000, HideCorrect)
+			numberOfPoints = numberOfPoints + 1	
 
         -- create increasing points in the text object
-			 pointsTextObject.text = "Points = ".. numberOfPoints
+			pointsTextObject.text = "Points = ".. numberOfPoints
 
 		else
 			incorrectObject.isVisible = true
 			wrongSoundChannel = audio.play(wrongSound)
 			lives = lives - 1
 			UpdateHearts()
-			timer.performWithDelay(2000,HideIncorrect)			
+			timer.performWithDelay(2000, HideIncorrect)			
 
 		end
 		event.target.text = "" 
